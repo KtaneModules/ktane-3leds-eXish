@@ -57,7 +57,6 @@ public class ThreeLEDsScript : MonoBehaviour {
             stemRends[i+6].material = stemMats[chosenLEDColors[i]];
             roofRends[i].material = roofMats[chosenLEDColors[i]];
             lights[i].color = lightCols[chosenLEDColors[i]];
-            lights[i+3].color = lightCols[chosenLEDColors[i]];
             int state = UnityEngine.Random.Range(0, 2);
             if (state == 0)
             {
@@ -132,7 +131,7 @@ public class ThreeLEDsScript : MonoBehaviour {
                     }
                     else
                     {
-                        correctStates[i] = stateTable[indexInTable][i];
+                        correctStates[i] = stateTable[indexInTable-1][i];
                     }
                 }
                 else if (chosenLEDColors[i] == 4)
@@ -148,7 +147,7 @@ public class ThreeLEDsScript : MonoBehaviour {
                     }
                     else
                     {
-                        correctStates[i] = stateTable[indexInTable][i];
+                        correctStates[i] = stateTable[indexInTable+1][i];
                     }
                 }
             }
@@ -197,7 +196,6 @@ public class ThreeLEDsScript : MonoBehaviour {
         for (int i = 0; i < 3; i++)
         {
             lights[i].enabled = currentStates[i];
-            lights[i+3].enabled = currentStates[i];
             if (colorblindActive)
                 cbTexts[i].text = colorNames[chosenLEDColors[i]];
         }
@@ -226,7 +224,6 @@ public class ThreeLEDsScript : MonoBehaviour {
                     {
                         currentStates[i] = initialStates[i];
                         lights[i].enabled = currentStates[i];
-                        lights[i+3].enabled = currentStates[i];
                     }
                 }
             }
@@ -238,14 +235,12 @@ public class ThreeLEDsScript : MonoBehaviour {
                     audio.PlaySoundAtTransform("on", pressed.transform);
                     currentStates[Array.IndexOf(buttons, pressed)-1] = true;
                     lights[Array.IndexOf(buttons, pressed)-1].enabled = true;
-                    lights[Array.IndexOf(buttons, pressed)+2].enabled = true;
                 }
                 else
                 {
                     audio.PlaySoundAtTransform("off", pressed.transform);
                     currentStates[Array.IndexOf(buttons, pressed)-1] = false;
                     lights[Array.IndexOf(buttons, pressed)-1].enabled = false;
-                    lights[Array.IndexOf(buttons, pressed)+2].enabled = false;
                 }
             }
         }
