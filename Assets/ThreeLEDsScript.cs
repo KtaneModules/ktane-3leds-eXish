@@ -38,11 +38,6 @@ public class ThreeLEDsScript : MonoBehaviour {
     {
         moduleId = moduleIdCounter++;
         moduleSolved = false;
-        float scalar = transform.lossyScale.x;
-        foreach (Light l in lights)
-        {
-            l.range *= scalar;
-        }
         foreach (KMSelectable obj in buttons)
         {
             KMSelectable pressed = obj;
