@@ -49,6 +49,9 @@ public class ThreeLEDsScript : MonoBehaviour {
     void Start () {
         if (Colorblind.ColorblindModeActive)
             colorblindActive = true;
+        float scalar = transform.lossyScale.x;
+        foreach (Light l in lights)
+            l.range *= scalar;
         for (int i = 0; i < 3; i++)
         {
             chosenLEDColors[i] = UnityEngine.Random.Range(0, lightCols.Length);
