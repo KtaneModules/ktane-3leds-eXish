@@ -38,6 +38,11 @@ public class ThreeLEDsScript : MonoBehaviour {
     {
         moduleId = moduleIdCounter++;
         moduleSolved = false;
+        float scalar = transform.lossyScale.x;
+        foreach (Light l in lights)
+        {
+            l.range *= scalar;
+        }
         foreach (KMSelectable obj in buttons)
         {
             KMSelectable pressed = obj;
@@ -99,7 +104,7 @@ public class ThreeLEDsScript : MonoBehaviour {
                 }
                 else if (chosenLEDColors[i] == 1)
                 {
-                    Debug.LogFormat("[3 LEDs #{0}] LED {1} is red, therefore this LED's correct state is the state of the LED in this position in the picture above the initial in the manual's table", moduleId, i + 1);
+                    Debug.LogFormat("[3 LEDs #{0}] LED {1} is red, therefore this LED's correct state is the state of the LED in this position in the picture above or below the initial in the manual's table", moduleId, i + 1);
                     if (indexInTable > 2)
                     {
                         correctStates[i] = stateTable[indexInTable-3][i];
@@ -111,7 +116,7 @@ public class ThreeLEDsScript : MonoBehaviour {
                 }
                 else if (chosenLEDColors[i] == 2)
                 {
-                    Debug.LogFormat("[3 LEDs #{0}] LED {1} is blue, therefore this LED's correct state is the state of the LED in this position in the picture below the initial in the manual's table", moduleId, i + 1);
+                    Debug.LogFormat("[3 LEDs #{0}] LED {1} is blue, therefore this LED's correct state is the state of the LED in this position in the picture above or below the initial in the manual's table", moduleId, i + 1);
                     if (indexInTable < 3)
                     {
                         correctStates[i] = stateTable[indexInTable+3][i];
